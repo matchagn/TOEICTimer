@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var part7_3 = Int(minTextFieldPart7_3.text!)
         
         // Partごとの時間の合計
-        var result = part5 + part6 + part7_1 + part7_2 + part7_3
+        // var result = part5 + part6 + part7_1 + part7_2 + part7_3
         // Do any additional setup after loading the view, typically from a nib.
     }
     
