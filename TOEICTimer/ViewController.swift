@@ -42,9 +42,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Partごとの時間の合計
         var result = part5 + part6 + part7_1 + part7_2 + part7_3
         
+        // 合計した時間を表示
         self.homeTimerLabel.text = String(result)
-//        print(result)
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    // HOMEで入力した値を合計して、タイマーに反映する処理
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? TimerViewController {
+            let part5 = Int(minTextFieldPart5.text!) ?? 0
+            let part6 = Int(minTextFieldPart6.text!) ?? 0
+            let part7_1 = Int(minTextFieldPart7_1.text!) ?? 0
+            let part7_2 = Int(minTextFieldPart7_2.text!) ?? 0
+            let part7_3 = Int(minTextFieldPart7_3.text!) ?? 0
+            viewController.timer_min = part5 + part6 + part7_1 + part7_2 + part7_3
+        }
     }
     
     // キーボード外をタップするとキーボードを閉じる処理

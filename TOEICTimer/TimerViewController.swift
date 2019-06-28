@@ -26,10 +26,10 @@ class TimerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         // タイマー（分）用の変数の初期化
-        timer_min = 75
+//        timer_min = 75
         
         // タイマー（秒）用の変数の初期化
-        timer_sec = 60
+//        timer_sec = 60
         
         // タイマーの作成、始動
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
@@ -38,17 +38,16 @@ class TimerViewController: UIViewController {
     // selector: #selector(updatetimer(_:)) で指定された関数
     // timeInterval: 0.1, repeats: true で指定された通り、0.1秒毎に呼び出され続ける
     @objc func updateTimer(_ timer_min: Timer) {
-        self.timer_min = 75
-        self.timer_sec -= 1
-//        if timer_sec <= 60 {
-//
-//        }
-        self.timerLabel.text = String(format: "%02d:%02d", timer_min, timer_sec)
-}
+        
+        self.timer_sec += 1
+        let seconds = self.timer_min * 60 - timer_sec
+        let minutes = seconds / 60
+        self.timerLabel.text = String(format: "%02d:%02d", minutes, seconds % 60)
+    }
     
     // キャンセルボタン
     @IBAction func cancelTimer(_ sender: Any) {
-        // キャンセルボタンを押すと、タイマーの時間を初期値に
+        // キャンセルボタンを押すと、タイマーの時間を設定した時間に初期化する
         self.timer_min = 75
         self.timer_sec = 0
         self.timerLabel.text = String(format: "%02d:%02d", timer_min, timer_sec)
