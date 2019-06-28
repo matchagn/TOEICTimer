@@ -21,26 +21,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Part5の時間入力
         minTextFieldPart5.keyboardType = UIKeyboardType.numberPad
-        var part5 = Int(minTextFieldPart5.text!)
+        var part5 = Int(minTextFieldPart5.text!) ?? 0
         
         // Part6の時間入力
         minTextFieldPart6.keyboardType = UIKeyboardType.numberPad
-        var part6 = Int(minTextFieldPart6.text!)
+        var part6 = Int(minTextFieldPart6.text!) ?? 0
         
         // Part7_SinglePassageの時間入力
         minTextFieldPart7_1.keyboardType = UIKeyboardType.numberPad
-        var part7_1 = Int(minTextFieldPart7_1.text!)
+        var part7_1 = Int(minTextFieldPart7_1.text!) ?? 0
         
         // Part7_DoublePassageの時間入力
         minTextFieldPart7_2.keyboardType = UIKeyboardType.numberPad
-        var part7_2 = Int(minTextFieldPart7_2.text!)
+        var part7_2 = Int(minTextFieldPart7_2.text!) ?? 0
         
         // Part7_TriplePassageの時間入力
         minTextFieldPart7_3.keyboardType = UIKeyboardType.numberPad
-        var part7_3 = Int(minTextFieldPart7_3.text!)
+        var part7_3 = Int(minTextFieldPart7_3.text!) ?? 0
         
         // Partごとの時間の合計
-        // var result = part5 + part6 + part7_1 + part7_2 + part7_3
+        var result = part5 + part6 + part7_1 + part7_2 + part7_3
         // Do any additional setup after loading the view, typically from a nib.
     }
     
