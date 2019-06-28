@@ -41,6 +41,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // Partごとの時間の合計
         var result = part5 + part6 + part7_1 + part7_2 + part7_3
+        
+        self.homeTimerLabel.text = String(result)
+//        print(result)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
