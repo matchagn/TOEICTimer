@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Part5の時間入力
         minTextFieldPart5.keyboardType = UIKeyboardType.numberPad
         var part5 = Int(minTextFieldPart5.text!) ?? 0

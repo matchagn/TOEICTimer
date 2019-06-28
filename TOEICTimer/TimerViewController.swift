@@ -23,13 +23,6 @@ class TimerViewController: UIViewController {
         
         // UINavigationControllerのタイトルを設定
         self.title = "タイマー"
-
-        // Do any additional setup after loading the view.
-        // タイマー（分）用の変数の初期化
-//        timer_min = 75
-        
-        // タイマー（秒）用の変数の初期化
-//        timer_sec = 60
         
         // タイマーの作成、始動
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
