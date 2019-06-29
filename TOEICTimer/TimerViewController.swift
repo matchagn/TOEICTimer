@@ -41,14 +41,20 @@ class TimerViewController: UIViewController {
     // キャンセルボタン
     @IBAction func cancelTimer(_ sender: Any) {
         // キャンセルボタンを押すと、タイマーの時間を設定した時間に初期化する
-        self.timer_min = 75
         self.timer_sec = 0
         self.timerLabel.text = String(format: "%02d:%02d", timer_min, timer_sec)
     }
     
     // スタート/一時停止ボタン
     @IBAction func startTimer(_ sender: Any) {
-        self.timer_min -= 75
+        if self.timer_min && self.timer_sec != nil {
+            self.timer_min.invalidate()
+            self.timer_sec.invalidate()
+            startTimer.setTitle("Resume", for: .normal)
+        }else{
+            Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
+            startTimer.setTitle("Pause", for: .normal)
+        }
         self.timerLabel.text = String(format: "%02d:00", timer_min)
     }
     
