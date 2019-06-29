@@ -12,6 +12,9 @@ class TimerViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
     
+    // タイマー
+    var timer: Timer!
+    
     // タイマー用の時間（分）のための変数
     var timer_min: Int = 0
     
@@ -25,7 +28,7 @@ class TimerViewController: UIViewController {
         self.title = "タイマー"
         
         // タイマーの作成、始動
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
+       self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
     }
     
     // selector: #selector(updatetimer(_:)) で指定された関数
@@ -47,9 +50,8 @@ class TimerViewController: UIViewController {
     
     // スタート/一時停止ボタン
     @IBAction func startTimer(_ sender: Any) {
-        if self.timer_min && self.timer_sec != nil {
-            self.timer_min.invalidate()
-            self.timer_sec.invalidate()
+        if self.timer == nil {
+            self.timer.invalidate()
             startTimer.setTitle("Resume", for: .normal)
         }else{
             Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
