@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class TimerViewController: UIViewController {
+class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startStopBtn: UIButton!
@@ -36,11 +36,29 @@ class TimerViewController: UIViewController {
     // selector: #selector(updatetimer(_:)) で指定された関数
     // timeInterval: 0.1, repeats: true で指定された通り、0.1秒毎に呼び出され続ける
     @objc func updateTimer(_ timer_min: Timer) {
-        
+        // タイマーの時間（分、秒）の設定
         self.timer_sec += 1
         let seconds = self.timer_min * 60 - timer_sec
         let minutes = seconds / 60
         self.timerLabel.text = String(format: "%02d:%02d", minutes, seconds % 60)
+        
+        // ローカル通知の内容
+        let content = UNMutableNotificationContent()
+        content.sound = UNNotificationSound.default
+        content.title = "Finish!"
+        content.body = "おつかれさまでした。"
+        
+        // ローカル通知リクエストを作成
+        if minutes == 0 && seconds == 0 {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(minutes), repeats: false)
+        let identifier = NSUUID().uuidString
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request){ (error : Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        }
     }
     
     // キャンセルボタン
