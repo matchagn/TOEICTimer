@@ -47,8 +47,14 @@ class TimerViewController: UIViewController {
     @IBAction func cancelTimer(_ sender: Any) {
         // キャンセルボタンを押すと、タイマーの時間を設定した時間に初期化する
         self.timer_sec = 0
-        self.timer.invalidate()
         self.timerLabel.text = String(format: "%02d:%02d", timer_min, timer_sec)
+        
+        // キャンセルボタンを押した時、Pause/ResumeボタンをStartボタンに変更する処理
+        if self.timer != nil {
+            self.timer.invalidate()
+            self.timer = nil
+        }
+        startStopBtn.setTitle("Start", for: .normal)
     }
     
     // Start/Pause/Resumeボタン
