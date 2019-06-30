@@ -50,7 +50,7 @@ class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         // ローカル通知リクエストを作成
         if minutes == 0 && seconds == 0 {
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(minutes), repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
         let identifier = NSUUID().uuidString
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request){ (error : Error?) in
