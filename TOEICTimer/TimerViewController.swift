@@ -26,8 +26,8 @@ class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // UINavigationControllerのタイトルを設定
-        self.title = "タイマー"
+    // UINavigationControllerのタイトルを設定
+    self.title = "タイマー"
         
         // タイマーの作成、始動
        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
@@ -50,18 +50,32 @@ class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         // ローカル通知リクエストを作成
         if minutes == 0 && seconds == 0 {
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-        let identifier = NSUUID().uuidString
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request){ (error : Error?) in
-            if let error = error {
-                print(error.localizedDescription)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            let identifier = NSUUID().uuidString
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            self.timer.invalidate()
+            
+            // アラートの設定 ここから
+            let alert: UIAlertController = UIAlertController(title: "Finish!", message: "おつかれさまでした。", preferredStyle:  UIAlertController.Style.alert)
+            let doneAction: UIAlertAction = UIAlertAction(title: "完了", style: UIAlertAction.Style.default, handler:{
+                (action: UIAlertAction!) -> Void in
+                print("OK")
+            })
+            alert.addAction(doneAction)
+            present(alert, animated: true, completion: nil)
+            // アラートの設定ここまで
+  
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+            center.add(request){ (error : Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
             }
-        }
         }
     }
     
-    // キャンセルボタン
+    // キャンセルボタンの設定
     @IBAction func cancelTimer(_ sender: Any) {
         // キャンセルボタンを押すと、タイマーの時間を設定した時間に初期化する
         self.timer_sec = 0
@@ -75,7 +89,7 @@ class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
         startStopBtn.setTitle("Start", for: .normal)
     }
     
-    // Start/Pause/Resumeボタン
+    // Start/Pause/Resumeボタンの設定
     @IBAction func startTimer(_ sender: Any) {
         if self.timer != nil {
             self.timer.invalidate()
