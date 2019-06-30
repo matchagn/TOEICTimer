@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class TimerViewController: UIViewController {
     
@@ -45,20 +46,21 @@ class TimerViewController: UIViewController {
     // キャンセルボタン
     @IBAction func cancelTimer(_ sender: Any) {
         // キャンセルボタンを押すと、タイマーの時間を設定した時間に初期化する
+        self.timer_sec = 0
         self.timer.invalidate()
         self.timerLabel.text = String(format: "%02d:%02d", timer_min, timer_sec)
     }
     
-    // Start/Pauseボタン
+    // Start/Pause/Resumeボタン
     @IBAction func startTimer(_ sender: Any) {
         if self.timer != nil {
             self.timer.invalidate()
+            self.timer = nil
             startStopBtn.setTitle("Resume", for: .normal)
         }else{
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
             startStopBtn.setTitle("Pause", for: .normal)
         }
-        self.timerLabel.text = String(format: "%02d:00", timer_min)
     }
     
     /*
