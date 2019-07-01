@@ -52,6 +52,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let part7_2 = Int(minTextFieldPart7_2.text!) ?? 0
             let part7_3 = Int(minTextFieldPart7_3.text!) ?? 0
             viewController.timer_min = part5 + part6 + part7_1 + part7_2 + part7_3
+            viewController.remainingTimerPart5_min = part5
+            viewController.remainingTimerPart6_min = part6
+            viewController.remainingTimerPart7_1_min = part7_1
+            viewController.remainingTimerPart7_2_min = part7_2
+            viewController.remainingTimerPart7_3_min = part7_3
         }
     }
     

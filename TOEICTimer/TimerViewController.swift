@@ -13,15 +13,50 @@ class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startStopBtn: UIButton!
+    @IBOutlet weak var remainingTimePart5: UILabel!
+    @IBOutlet weak var remainingTimerPart6: UILabel!
+    @IBOutlet weak var remainingTimePart7_1: UILabel!
+    @IBOutlet weak var remainingTimePart7_2: UILabel!
+    @IBOutlet weak var remainingTimePart7_3: UILabel!
+    
     
     // タイマー
     var timer: Timer!
+    
+    // タイマー（残り時間）
+    var remainingTimer: Timer!
     
     // タイマー用の時間（分）のための変数
     var timer_min: Int = 0
     
     // タイマー用の時間（秒）のための変数
     var timer_sec: Int = 0
+    
+    // タイマー（残り時間：分） Part5のための変数
+    var remainingTimerPart5_min: Int = 0
+    // タイマー（残り時間：秒） Part5のための変数
+    var remainingTimerPart5_sec: Int = 0
+    
+    // タイマー（残り時間：分） Part6のための変数
+    var remainingTimerPart6_min: Int = 0
+    // タイマー（残り時間：秒） Part6のための変数
+    var remainingTimerPart6_sec: Int = 0
+    
+    // タイマー（残り時間：分） Part7-1のための変数
+    var remainingTimerPart7_1_min: Int = 0
+    // タイマー（残り時間：秒） Part7-1のための変数
+    var remainingTimerPart7_1_sec: Int = 0
+    
+    // タイマー（残り時間：分） Part7-2のための変数
+    var remainingTimerPart7_2_min: Int = 0
+    // タイマー（残り時間：秒） Part7-2のための変数
+    var remainingTimerPart7_2_sec: Int = 0
+    
+    // タイマー（残り時間：分） Part7-3のための変数
+    var remainingTimerPart7_3_min: Int = 0
+    // タイマー（残り時間：秒） Part7-3のための変数
+    var remainingTimerPart7_3_sec: Int = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +136,22 @@ class TimerViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     
+    // タイマー（残り時間）の設定
+    @objc func updateRemainingTimer(_ timer_min: Timer) {
+        // タイマーの作成、始動
+        self.remainingTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
+        
+        // タイマーの時間（分、秒）の設定
+        self.remainingTimerPart5_sec += 1
+        let seconds = self.remainingTimerPart5_min * 60 - remainingTimerPart5_sec
+        let minutes = seconds / 60
+        self.remainingTimePart5.text = String(format: "%02d:%02d", minutes, seconds % 60)
+        
+        if minutes == 0 && seconds == 0 {
+            self.timer.invalidate()
+            self.timer = nil
+        }
+    }
     /*
     // MARK: - Navigation
 
